@@ -3,20 +3,21 @@ import ScreenWrapper from '@/components/ScreenWrapper'
 import Typo from '@/components/Typo'
 import { colors, spacingX, spacingY } from '@/constants/theme'
 import { verticalScale } from '@/utils/styling'
-import { useEffect } from 'react'
-import { Image, StyleSheet, TouchableOpacity, View } from 'react-native'
+import { useRouter } from 'expo-router'
+import { StyleSheet, TouchableOpacity, View } from 'react-native'
 import Animated, { FadeIn, FadeInDown } from 'react-native-reanimated'
 
 const Welcome = () => {
-  useEffect(() => {
-    console.log('Welcome screen loaded')
-  }, [])
+  const router = useRouter()
   return (
     <ScreenWrapper>
       <View style={styles.container}>
         {/*Login button and image */}
         <View>
-          <TouchableOpacity style={styles.loginButton}>
+          <TouchableOpacity
+            onPress={() => router.push('/(auth)/login')}
+            style={styles.loginButton}
+          >
             <Typo fontWeight={'500'}>Sign in</Typo>
           </TouchableOpacity>
 
@@ -57,7 +58,7 @@ const Welcome = () => {
             entering={FadeInDown.duration(1000).delay(500)}
             style={styles.buttonContainer}
           >
-            <Button>
+            <Button onPress={() => router.push('/(auth)/register')}>
               <Typo size={20} color={colors.neutral900} fontWeight={'600'}>
                 Get Started
               </Typo>
